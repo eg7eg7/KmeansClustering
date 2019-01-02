@@ -14,12 +14,12 @@
     HF = 3700;              % upper frequency limit (Hz)
     
     % Define KMeans variables
-    K = 1;                  % Number of clusters
+    K = 20;                  % Number of clusters
     Thrsh = 1;              % Min error (percentage)
     maxITER = 100;          % Maximum iterations
     
-    wav_file1 = 'shee.wav';  % input audio filename
-    wav_file2 = 'shoo.wav';
+    wav_file1 = 'shee_mono.wav';  % input audio filename
+    wav_file2 = 'shoo_mono.wav';
  
     % Read speech samples, sampling rate and precision from file
     [ speech_shee, fs_shee ] = audioread( wav_file1 );
@@ -35,6 +35,6 @@
    
     % Cluster data
     [Clusters,INDX, Err]=CalcKmeans(MFCCs_shee , K , Thrsh ,maxITER );
-    
+    [Clusters,INDX, Err]=CalcKmeans(MFCCs_shoo , K , Thrsh ,maxITER );
     
 % EOF

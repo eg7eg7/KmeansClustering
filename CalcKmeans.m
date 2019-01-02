@@ -1,7 +1,8 @@
 function [Clusters,INDX, Err]=CalcKmeans(DataMATRIX , K , Thrsh ,maxITER )
 
 
-%                   EDEN DUPONT AFEKA COLLEGE
+%                  |EDEN DUPONT | DANIIL ROLNIK | EDEN SHARONI |
+%                                 AFEKA COLLEGE
 %   Inputs
 %    K - the number of clusters
 %
@@ -17,8 +18,20 @@ function [Clusters,INDX, Err]=CalcKmeans(DataMATRIX , K , Thrsh ,maxITER )
 %           Clusters - the calculated weight matrix of K (K columns, m lines)
 %
 %           INDX is N size vector, which maps the data into clusters
-
+Clusters=0;
+Err=0;
 if isempty(Thrsh)
   Thrsh = 1;
-  return
-end
+end;
+
+if isempty(maxITER)
+  maxITER = 5;
+end;
+
+
+% m - Dimension, n - data size
+[m,n] = size(DataMATRIX);
+
+%initializes data frames into random clusters
+INDX = randi(K,1,n);
+
