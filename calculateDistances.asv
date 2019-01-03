@@ -1,0 +1,4 @@
+function DistanceMatrix = calculateDistances(INDX, DataMATRIX,Clusters)
+%Calculates distance for each data point to each cluster K, returns matrix
+%of distances
+

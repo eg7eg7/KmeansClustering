@@ -46,6 +46,9 @@ end
 %% 2-Calculate distance for each datapoint to each cluster and assign to
 %% closest cluster center
 
+DistanceMatrix = calculateDistances(DataMATRIX,Clusters);
+
+
 %% 3- Calculate error - defined to be the average distance of a node to it's
 %% parent
 
