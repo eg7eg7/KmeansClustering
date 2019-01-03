@@ -17,7 +17,9 @@ function [Clusters,INDX, Err]=CalcKmeans(DataMATRIX , K , Thrsh ,maxITER )
 %
 %           Clusters - the calculated weight matrix of K (K columns, m lines)
 %
-%           INDX is N size vector, which maps the data into clusters
+%           INDX is N size vector, which maps the centroid points into clusters
+
+Thrsh = 100*(Err(N)-Err(N-1))/(Err(N))
 
 if isempty(Thrsh)
   Thrsh = 1;
@@ -61,7 +63,10 @@ end
 % rate is under the minimum value
 
 
-
-
 %stub - delete later
 Err=0;
+
+% Question #2
+% A1 = (2,10) ; A2 = (2,5) ; A3 = (8,4) ; A4 = (5,8) ; A5 = (7,5) ;
+% A6 = (6,4) ; A7 = (1,2) ; A8 = (4,9) 
+A = [2 10; 2 5 ; 8 4; 5 8; 7 5; 6 4; 1 2; 4 9]; % Matrix of A values
