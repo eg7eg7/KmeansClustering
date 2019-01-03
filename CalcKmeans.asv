@@ -62,19 +62,19 @@ for iterations=1:maxITER
     
     %% 4 - Calculate average for each dimension using data points in clusters and
     %% refresh K co-ordinates
-    
+    [Clusters, cluster_changes] = clusterWeightCalc(INDX,DataMATRIX);
     
     
     %% repeat 2, 3 and 4 until halting criteria is met:
-    % a. no cluster is changed
+    % a. no cluster is changed (done - if cluster_changes is 0)
     %
-    % b. max iterations reached
+    % b. max iterations reached (done)
     %
-    % c. changes in cluster centers are minor
+    % c. changes in cluster centers are minor (done)
     %
     % d. The change in error rate is under a certain percentage OR the error
     % rate is under the minimum value
-    
+    if(cluster_changes <)
     if((iterations ~= 1))
         this_err=Err(1,iterations);
         prev_err=Err(1,iterations-1);
@@ -88,7 +88,7 @@ for iterations=1:maxITER
     
     
 end
-
+return;
 % Question #2
 % A1 = (2,10) ; A2 = (2,5) ; A3 = (8,4) ; A4 = (5,8) ; A5 = (7,5) ;
 % A6 = (6,4) ; A7 = (1,2) ; A8 = (4,9)
