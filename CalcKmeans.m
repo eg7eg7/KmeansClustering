@@ -77,7 +77,7 @@ for iterations=1:maxITER
     % rate is under the minimum value (done)
     
     if((iterations ~= 1))
-        [Clusters, cluster_changes] = clusterWeightCalc(INDX,DataMATRIX, Clusters, cluster_changes);
+        [Clusters, cluster_changes] = clusterWeightCalc(INDX,DataMATRIX, Clusters, K);
         if(cluster_changes < min_cluster_change)
             return;
         end
