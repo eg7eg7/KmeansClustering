@@ -12,7 +12,6 @@ function [Clusters, cluster_changes] = clusterWeightCalc(INDX,DataMATRIX, prev_c
 
 [n,m] = size(DataMATRIX);
 Clusters(1:n,1:K) = 0;
-% cluster_changes(1:1, 1:K) = 0;
 num_points_in_cluster(1:1,1:K) = 0;
 
 for i = 1:m
@@ -45,4 +44,3 @@ cluster_changes_matrix = abs(Clusters-prev_clusters);
 % cluster_changes_matrix = cluster_changes_matrix *100;
 cluster_changes = sum(sum(cluster_changes_matrix));
 cluster_changes = cluster_changes / (n*K);
-disp('print');
