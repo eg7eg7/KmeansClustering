@@ -4,8 +4,8 @@ function DistanceMatrix = calculateDistances(DataMATRIX,Clusters)
 
 %K Columns and n rows
 
-[m,n] = size(DataMATRIX);
-[dim,K] = size(Clusters);
+n = size(DataMATRIX,2);
+K = size(Clusters,2);
 DistanceMatrix(1:n,1:K) = 0;
 
 for i=1:n

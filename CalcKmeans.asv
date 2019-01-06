@@ -77,23 +77,23 @@ for iterations=1:maxITER
     %
     % d. The change in error rate is under a certain percentage OR the error
     % rate is under the minimum value (done)
-    prev_Clusters = Clusters;
-    Clusters = clusterWeightCalc(INDX,DataMATRIX, K);
-    %cluster_changes(1,iterations) = calcClusterChanges(prev_Clusters, Clusters);
+    Clusters = clusterWeightCalc(INDX,DataMATRIX, Clusters, K);
+    cluster_changes(1,iterations) = calc
+    if((iterations ~= 1))
+        if(cluster_changes(1,iterations) < min_cluster_change)
+            return;
+        end
+        
+        this_err=Err(1,iterations);
+        prev_err=Err(1,iterations-1);
+        err_percent_change = 100*(this_err-prev_err)/this_err;
+        err_change = abs(this_err-prev_err);
+        
+        if(err_percent_change < Thrsh || err_change < err_max_change)
+            return;
+        end
+    end
     
-    %if((iterations ~= 1))
-    %    if(cluster_changes(1,iterations) < min_cluster_change)
-    %        return;
-    %    end
-    
-    %    this_err=Err(1,iterations);
-    %   prev_err=Err(1,iterations-1);
-    %   err_percent_change = 100*(this_err-prev_err)/this_err;
-    %   err_change = abs(this_err-prev_err);
-    
-    %  if(err_percent_change < Thrsh || err_change < err_max_change)
-    %      return;
-    %  end
 end
 
 

@@ -1,7 +1,6 @@
 function Err=calcError(INDX,DistanceMatrix)
 
-[n,datapoints] = size(INDX);
-[datapoints2,K] = size(DistanceMatrix);
+datapoints = size(INDX,2);
 
 sumDistance = 0;
 for i=1:datapoints

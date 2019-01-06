@@ -14,9 +14,9 @@
     HF = 3700;              % upper frequency limit (Hz)
     
     % Define KMeans variables
-    K = 30;                  % Number of clusters
-    Thrsh = 60;              % Min error (percentage)
-    maxITER = 200;          % Maximum iterations
+    K = 4;                  % Number of clusters
+    Thrsh = 1;              % Min error (percentage)
+    maxITER = 20;          % Maximum iterations
     
     wav_file1 = 'shee_mono.wav';  % input audio filename
     wav_file2 = 'shoo_mono.wav';
