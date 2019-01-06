@@ -22,5 +22,7 @@ end
 
 
 for i=1:K
+    if(num_points_in_cluster(1,i) ~= 0)
     Clusters(:,i) = Clusters(:,i)/num_points_in_cluster(1,i);
+    end
 end

@@ -18,7 +18,7 @@ change = 100;
 %     %perform average
 %     cluster_changes(1, i) = mean(cluster_row(j,:));
 
-cluster_changes_matrix = abs(Clusters-prev_Clusters);
+%cluster_changes_matrix = abs(Clusters-prev_Clusters);
 % cluster_changes_matrix = cluster_changes_matrix *100;
-cluster_changes = sum(sum(cluster_changes_matrix));
-cluster_changes = cluster_changes / (n*K);
+%cluster_changes = sum(sum(cluster_changes_matrix));
+%cluster_changes = cluster_changes / (n*K);

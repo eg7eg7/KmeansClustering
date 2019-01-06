@@ -1,4 +1,4 @@
-function [Clusters,INDX, Err, val]=CalcKmeans(DataMATRIX , K , Thrsh ,maxITER )
+function [Clusters,INDX, Err, debug_val]=CalcKmeans(DataMATRIX , K , Thrsh ,maxITER )
 %% NOTE FOR LATER
 %REMOVE 4TH RETURNED VALUE
 
@@ -21,8 +21,8 @@ function [Clusters,INDX, Err, val]=CalcKmeans(DataMATRIX , K , Thrsh ,maxITER )
 %           INDX is N size vector, which maps the centroid points into clusters
 
 %Thrsh = 100*(Err(N)-Err(N-1))/(Err(N))
-
-err_max_change = 0.03;
+debug_val=0;
+err_max_change = 0.003;
 min_cluster_change = 0;
 if isempty(Thrsh)
     Thrsh = 1;
@@ -35,7 +35,11 @@ end
 
 % m - Dimension, n - data size
 [m,n] = size(DataMATRIX);
-
+if(K>n)
+    K=n;
+    disp("data given is too little for such clustering, K changed to " + n);
+    disp("K="+n+"");
+end
 %initializes data frames into random clusters
 INDX = randi(K,1,n);
 Clusters(1:m,1:K) = 0;
@@ -51,22 +55,43 @@ for i=1:K
 end
 
 for iterations=1:maxITER
-    %% 2-Calculate distance for each datapoint to each cluster and assign to
-    %% closest cluster center
-    
+    debug_val = iterations;
     DistanceMatrix = calculateDistances(DataMATRIX,Clusters);
     INDX = assignClosest(DistanceMatrix);
-    val = iterations;
-    %% 3- Calculate error - defined to be the average distance of a node to it's
-    %% parent
     Err(1,iterations)=calcError(INDX,DistanceMatrix);
+    prev_Clusters = Clusters;
+    Clusters = clusterWeightCalc(INDX,DataMATRIX, K);
+    
+    if((iterations ~= 1))
+    cluster_changes(1,iterations) = calcClusterChanges(prev_Clusters, Clusters);
+    
+    %% TODO
+        if(cluster_changes(1,iterations) <= min_cluster_change)
+            disp("reached minimum cluster change");
+            return;
+        end
+    %%
+       this_err=Err(1,iterations);
+       prev_err=Err(1,iterations-1);
+       err_percent_change = 100*abs(this_err-prev_err)/this_err;
+       err_change = abs(this_err-prev_err);
+    
+      if(err_percent_change < Thrsh || err_change < err_max_change)
+          disp("reached Threshold, percentage changed" + err_percent_change + "of " +Thrsh);
+          disp("error changed by " + err_change + " max is " + err_max_change)
+          return;
+      end
+      
+      
+    end
     
     
-    %% 4 - Calculate average for each dimension using data points in clusters and
-    %% refresh K co-ordinates
+
     
     
-    
+end
+disp("reached max iterations");
+
     
     %% repeat 2, 3 and 4 until halting criteria is met:
     % a. no cluster is changed (done - if cluster_changes is 0)
@@ -77,27 +102,7 @@ for iterations=1:maxITER
     %
     % d. The change in error rate is under a certain percentage OR the error
     % rate is under the minimum value (done)
-    prev_Clusters = Clusters;
-    Clusters = clusterWeightCalc(INDX,DataMATRIX, K);
-    %cluster_changes(1,iterations) = calcClusterChanges(prev_Clusters, Clusters);
     
-    %if((iterations ~= 1))
-    %    if(cluster_changes(1,iterations) < min_cluster_change)
-    %        return;
-    %    end
     
-    %    this_err=Err(1,iterations);
-    %   prev_err=Err(1,iterations-1);
-    %   err_percent_change = 100*(this_err-prev_err)/this_err;
-    %   err_change = abs(this_err-prev_err);
-    
-    %  if(err_percent_change < Thrsh || err_change < err_max_change)
-    %      return;
-    %  end
-end
 
-
-% Question #2
-% A1 = (2,10) ; A2 = (2,5) ; A3 = (8,4) ; A4 = (5,8) ; A5 = (7,5) ;
-% A6 = (6,4) ; A7 = (1,2) ; A8 = (4,9)
 A = [2 10; 2 5 ; 8 4; 5 8; 7 5; 6 4; 1 2; 4 9]; % Matrix of A values
