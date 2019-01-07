@@ -16,7 +16,7 @@
     %% Define KMeans variables
     K = 3;                  % Number of clusters
     Thrsh = 1;             % Min error (percentage)
-    maxITER = 20;            % Maximum iterations
+    maxITER = 100;            % Maximum iterations
     
     wav_file1 = 'shee_mono.wav';  % input audio filename
     wav_file2 = 'shoo_mono.wav';
