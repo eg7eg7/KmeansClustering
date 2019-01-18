@@ -4,7 +4,7 @@
 
     
     %% Define MFCC variables
-    Tw = 25;                % analysis frame duration (ms)
+    Tw = 20;                % analysis frame duration (ms)
     Ts = 10;                % analysis frame shift (ms)
     alpha = 0.97;           % preemphasis coefficient
     M = 20;                 % number of filterbank channels 
@@ -14,7 +14,7 @@
     HF = 3700;              % upper frequency limit (Hz)
     
     %% Define KMeans variables
-    K = 3;                  % Number of clusters
+    K = 20;                  % Number of clusters
     Thrsh = 1;             % Min error (percentage)
     maxITER = 100;            % Maximum iterations
     

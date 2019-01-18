@@ -1,6 +1,8 @@
 function Clusters = clusterWeightCalc(INDX,DataMATRIX, K)
 
 %   Clusters is weight matrix - n rows (dimension) and K columns (number of clusters)
+%   cluster_changes is the percentage of change the weights moved from
+%   their previous location
 %
 %   INDX is the assignment vector, indicates for each datapoint it's
 %   cluster
@@ -11,10 +13,6 @@ function Clusters = clusterWeightCalc(INDX,DataMATRIX, K)
 [m, n] = size(DataMATRIX);
 Clusters(1:m,1:K) = 0;
 num_points_in_cluster(1:1,1:K) = 0;
-
-%index_to_cluster_index = 
-%for i = 1:K
-    
 
 for i = 1:n
     clusterIndex = INDX(i);

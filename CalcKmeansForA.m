@@ -51,11 +51,12 @@ Err(1:1,1:maxITER)=0;
 
 indexes = [1,4,7];
 [t,p] = size(indexes);
+
 for i=1:p
     j=indexes(i);
-    INDX(1,j)=i;
+    INDX(1,i)=j;
     column = DataMATRIX(:,j);
-    Clusters(:,j)=column;
+    Clusters(:,i)=column;
 end
 
 for iterations=1:maxITER
@@ -72,6 +73,7 @@ for iterations=1:maxITER
         
         if(cluster_change <= min_cluster_change)
             disp("reached minimum cluster change");
+            %plot
             return;
         end
         %%
