@@ -1,4 +1,5 @@
-function [Clusters,INDX, Err]=CalcKmeans(DataMATRIX , K , Thrsh ,maxITER )
+function [Clusters,INDX, Err]=CalcKmeansForA(DataMATRIX , Thrsh ,maxITER )
+K=3;
 %% NOTE FOR LATER
 %REMOVE 4TH RETURNED VALUE
 
@@ -21,7 +22,7 @@ function [Clusters,INDX, Err]=CalcKmeans(DataMATRIX , K , Thrsh ,maxITER )
 %           INDX is N size vector, which maps the centroid points into clusters
 
 %Thrsh = 100*(Err(N)-Err(N-1))/(Err(N))
-debug_val=0;
+
 err_max_change = 0.003;
 min_cluster_change = 0.01;
 if isempty(Thrsh)
@@ -48,10 +49,13 @@ Clusters(1:m,1:K) = 0;
 Err(1:1,1:maxITER)=0;
 %cluster_changes(1:1,1:maxITER)=0;
 
-for i=1:K
-    INDX(1,i)=i;
-    column = DataMATRIX(:,i);
-    Clusters(:,i)=column;
+indexes = [1,4,7];
+[t,p] = size(indexes);
+for i=1:p
+    j=indexes(i);
+    INDX(1,j)=i;
+    column = DataMATRIX(:,j);
+    Clusters(:,j)=column;
 end
 
 for iterations=1:maxITER
