@@ -77,7 +77,7 @@ for iterations=1:maxITER
         err_change = abs(this_err-prev_err);
         
         if(err_percent_change < Thrsh || err_change < err_max_change)
-            disp("reached Threshold, percentage changed " + err_percent_change + "of " +Thrsh);
+            disp("reached Threshold, percentage changed " + err_percent_change + " of " +Thrsh);
             disp("error changed by " + err_change + " max is " + err_max_change)
             return;
         end

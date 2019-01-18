@@ -23,7 +23,7 @@ K=3;
 
 %Thrsh = 100*(Err(N)-Err(N-1))/(Err(N))
 
-colors = ['r' 'g' 'b'];
+colors = ['r', 'g', 'b'];
 err_max_change = 0.003;
 min_cluster_change = 0.01;
 if isempty(Thrsh)
@@ -73,11 +73,9 @@ for iterations=1:maxITER
         %draw plot after every iteration
         figure
         axis([0 1 0 1])
+        hold on
         for i=1:n
-            cluster_index = INDX(i);
-            scatter(DataMATRIX(1,i), DataMATRIX(2,i), colors(cluster_index));
-            scatter(Clusters(1,cluster_index), Clusters(2,cluster_index), 'filled', colors(cluster_index));
-            hold on
+            scatter(DataMATRIX(1,:), DataMATRIX(2,:), colors);
         end
         
         cluster_change = calcClusterChanges(prev_Clusters, Clusters);
