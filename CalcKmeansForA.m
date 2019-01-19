@@ -52,20 +52,26 @@ for i=1:p
     column = DataMATRIX(:,j);
     Clusters(:,i)=column;
 end
-  figure
+
+
+    figure
     axis([0 1 0 1])
     for i=1:n
-        cluster_index = INDX(i);
         [x, y] = points_title(DataMATRIX(1,i), DataMATRIX(2,i));
-        scatter(x, y, colors(cluster_index));
-        
-        [x, y] = points_title(Clusters(1,cluster_index), Clusters(2,cluster_index));
-        scatter(x, y, 'filled', colors(cluster_index));
-        title_str = strcat('Iteration # ', int2str(0));
-        title(title_str);
+        scatter(x, y, colors(INDX(i)));
         hold on
     end
-    
+
+    for i=1:n
+        cluster_index = INDX(i);
+    [x, y] = points_title(Clusters(1,cluster_index), Clusters(2,cluster_index));
+    scatter(x, y, 'filled', colors(cluster_index));
+    hold on
+    title_str = strcat('Iteration # ', int2str(0));
+    title(title_str);
+    end
+    hold off
+
 for iterations=1:maxITER
     DistanceMatrix = calculateDistances(DataMATRIX,Clusters);
     INDX = assignClosest(DistanceMatrix);
@@ -77,16 +83,22 @@ for iterations=1:maxITER
     figure
     axis([0 1 0 1])
     for i=1:n
-        cluster_index = INDX(i);
         [x, y] = points_title(DataMATRIX(1,i), DataMATRIX(2,i));
-        scatter(x, y, colors(cluster_index));
-        
-        [x, y] = points_title(Clusters(1,cluster_index), Clusters(2,cluster_index));
-        scatter(x, y, 'filled', colors(cluster_index));
-        title_str = strcat('Iteration # ', int2str(iterations));
+        scatter(x, y, colors(INDX(i)));
         title(title_str);
         hold on
     end
+
+    
+    for i=1:n
+        cluster_index = INDX(i);
+    [x, y] = points_title(Clusters(1,cluster_index), Clusters(2,cluster_index));
+    scatter(x, y, 'filled', colors(cluster_index));
+    hold on
+    title_str = strcat('Iteration # ', int2str(iterations));
+    title(title_str);
+    end
+   hold off
     
 end
 disp("reached max iterations");

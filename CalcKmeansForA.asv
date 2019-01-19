@@ -53,6 +53,23 @@ for i=1:p
     Clusters(:,i)=column;
 end
 
+
+    figure
+    axis([0 1 0 1])
+    for i=1:n
+        [x, y] = points_title(DataMATRIX(1,i), DataMATRIX(2,i));
+        scatter(x, y, colors(cluster_index));
+    end
+
+    for i=1:n
+        cluster_index = INDX(i);
+    [x, y] = points_title(Clusters(1,cluster_index), Clusters(2,cluster_index));
+    scatter(x, y, 'filled', colors(cluster_index));
+    title_str = strcat('Iteration # ', int2str(iterations));
+    title(title_str);
+    end
+    hold on
+
 for iterations=1:maxITER
     DistanceMatrix = calculateDistances(DataMATRIX,Clusters);
     INDX = assignClosest(DistanceMatrix);
@@ -60,26 +77,25 @@ for iterations=1:maxITER
     Clusters = clusterWeightCalc(INDX,DataMATRIX, K);
     
     %draw plot after every iteration
+    
+    figure
+    axis([0 1 0 1])
+    for i=1:n
+        [x, y] = points_title(DataMATRIX(1,i), DataMATRIX(2,i));
+        scatter(x, y, colors(cluster_index));
+    end
 
-        figure
-        axis([0 1 0 1])
-        for i=1:n
-            title_str = strcat('Iteration # ', int2str(iterations));
-            x = DataMATRIX(1,i); 
-            y = DataMATRIX(2,i);
-            x_str = num2str(x); 
-            y_str = num2str(y);
-            point_str = strcat('(',x_str);
-            point_str = strcat(point_str,')')
-            dx = 0.1; dy = 0.1; % displacement so the text does not overlay the data points
-            text(x+dx, y+dy, point_str);
-            title(title_str);
-            cluster_index = INDX(i);
-            scatter(x, y, colors(cluster_index));
-            scatter(Clusters(1,cluster_index), Clusters(2,cluster_index), 'filled', colors(cluster_index));
-            hold on
-        end
-
+    
+    for i=1:n
+        cluster_index = INDX(i);
+    [x, y] = points_title(Clusters(1,cluster_index), Clusters(2,cluster_index));
+    scatter(x, y, 'filled', colors(cluster_index));
+    title_str = strcat('Iteration # ', int2str(iterations));
+    title(title_str);
+     
+    end
+   
+    
 end
 disp("reached max iterations");
 
