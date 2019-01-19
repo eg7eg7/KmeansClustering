@@ -23,11 +23,6 @@ maxITER=3;
 %Thrsh = 100*(Err(N)-Err(N-1))/(Err(N))
 
 colors = ['r' 'g' 'b'];
-err_max_change = 0.003;
-min_cluster_change = 0.01;
-if isempty(Thrsh)
-    Thrsh = 1;
-end
 
 if isempty(maxITER)
     maxITER = 5;
@@ -65,7 +60,7 @@ for iterations=1:maxITER
     Clusters = clusterWeightCalc(INDX,DataMATRIX, K);
     
     %draw plot after every iteration
-    if(iterations == 1 || iterations ==3)
+
         figure
         axis([0 1 0 1])
         for i=1:n
@@ -74,7 +69,7 @@ for iterations=1:maxITER
             scatter(Clusters(1,cluster_index), Clusters(2,cluster_index), 'filled', colors(cluster_index));
             hold on
         end
-    end
+
 end
 disp("reached max iterations");
 
