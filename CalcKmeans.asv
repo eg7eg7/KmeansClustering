@@ -61,9 +61,12 @@ for iterations=1:maxITER
     Clusters = clusterWeightCalc(INDX,DataMATRIX, K);
     
     if((iterations ~= 1))
+        %cluster_changes(1,iterations) = calcClusterChanges(prev_Clusters, Clusters);
         cluster_change = calcClusterChanges(prev_Clusters, Clusters);
+        
+        
         if(cluster_change <= min_cluster_change)
-            disp("reached minimum cluster change " + cluster_change + " of " + min_cluster_change);
+            disp("reached minimum cluster change " + cluster_change);
             return;
         end
         %%

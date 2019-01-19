@@ -1,7 +1,5 @@
 function [Clusters,INDX, Err]=CalcKmeansForA(DataMATRIX , Thrsh ,maxITER )
 K=3;
-%% NOTE FOR LATER
-%REMOVE 4TH RETURNED VALUE
 
 %                  |EDEN DUPONT | DANIIL ROLNIK | EDEN SHARONI |
 %                                 AFEKA COLLEGE
@@ -55,7 +53,7 @@ indexes = [1,4,7];
 
 for i=1:p
     j=indexes(i);
-    INDX(1,i)=j;
+    INDX(1,j)=i;
     column = DataMATRIX(:,j);
     Clusters(:,i)=column;
 end
@@ -67,11 +65,10 @@ for iterations=1:maxITER
     prev_Clusters = Clusters;
     Clusters = clusterWeightCalc(INDX,DataMATRIX, K);
     
-    if((iterations ~= 1))
-        %cluster_changes(1,iterations) = calcClusterChanges(prev_Clusters, Clusters);        
+    if((iterations ~= 1))       
         cluster_change = calcClusterChanges(prev_Clusters, Clusters);
         if(cluster_change <= min_cluster_change)
-            disp("reached minimum cluster change");
+           disp("reached minimum cluster change " + cluster_change +" of" + min_cluster_change);
             return;
         end
         %%
