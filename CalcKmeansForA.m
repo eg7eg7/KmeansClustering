@@ -22,7 +22,6 @@ maxITER=3;
 
 %Thrsh = 100*(Err(N)-Err(N-1))/(Err(N))
 
-colors = ['r' 'g' 'b'];
 
 if isempty(maxITER)
     maxITER = 5;
@@ -53,24 +52,8 @@ for i=1:p
     Clusters(:,i)=column;
 end
 
-%draw scatter plot with initialized values 
-figure
-axis([0 1 0 1])
-for i=1:n
-    [x, y] = points_title(DataMATRIX(1,i), DataMATRIX(2,i));
-    scatter(x, y, colors(INDX(i)));
-    hold on
-end
-
-for i=1:n
-    cluster_index = INDX(i);
-    [x, y] = points_title(Clusters(1,cluster_index), Clusters(2,cluster_index));
-    scatter(x, y, 'filled', colors(cluster_index));
-    hold on
-    title_str = 'Before Iterations started ';
-    title(title_str);
-end
-hold off
+%draw scatter plot with initialized values
+draw_points(DataMATRIX, Clusters, INDX,'After Initialization');
 
 for iterations=1:maxITER
     DistanceMatrix = calculateDistances(DataMATRIX,Clusters);
@@ -79,37 +62,7 @@ for iterations=1:maxITER
     Clusters = clusterWeightCalc(INDX,DataMATRIX, K);
     
     %draw plot after every iteration
-    figure
-    axis([0 1 0 1])
-    for i=1:n
-        %draw data points
-        [x, y] = points_title(DataMATRIX(1,i), DataMATRIX(2,i));
-        scatter(x, y, colors(INDX(i)));
-        title(title_str);
-        hold on
-    end
-    
-    
-    for i=1:n
-        %draw cluster points
-        cluster_index = INDX(i);
-        [x, y] = points_title(Clusters(1,cluster_index), Clusters(2,cluster_index));
-        scatter(x, y, 'filled', colors(cluster_index));
-        hold on
-        title_str = strcat('Iteration # ', int2str(iterations));
-        title(title_str);
-    end
-    hold off
+    draw_points(DataMATRIX, Clusters, INDX, strcat('Iteration #', num2str(iterations)));
     
 end
 disp("reached max iterations");
-
-%% repeat 2, 3 and 4 until halting criteria is met:
-% a. no cluster is changed (done - if cluster_changes is 0)
-%
-% b. max iterations reached (done)
-%
-% c. changes in cluster centers are minor (done)
-%
-% d. The change in error rate is under a certain percentage OR the error
-% rate is under the minimum value (done)
