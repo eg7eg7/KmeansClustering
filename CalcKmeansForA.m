@@ -53,7 +53,7 @@ for i=1:p
     Clusters(:,i)=column;
 end
 
-
+%draw scatter plot with initialized values 
 figure
 axis([0 1 0 1])
 for i=1:n
@@ -79,10 +79,10 @@ for iterations=1:maxITER
     Clusters = clusterWeightCalc(INDX,DataMATRIX, K);
     
     %draw plot after every iteration
-    
     figure
     axis([0 1 0 1])
     for i=1:n
+        %draw data points
         [x, y] = points_title(DataMATRIX(1,i), DataMATRIX(2,i));
         scatter(x, y, colors(INDX(i)));
         title(title_str);
@@ -91,6 +91,7 @@ for iterations=1:maxITER
     
     
     for i=1:n
+        %draw cluster points
         cluster_index = INDX(i);
         [x, y] = points_title(Clusters(1,cluster_index), Clusters(2,cluster_index));
         scatter(x, y, 'filled', colors(cluster_index));
@@ -103,7 +104,6 @@ for iterations=1:maxITER
 end
 disp("reached max iterations");
 
-
 %% repeat 2, 3 and 4 until halting criteria is met:
 % a. no cluster is changed (done - if cluster_changes is 0)
 %
@@ -113,7 +113,3 @@ disp("reached max iterations");
 %
 % d. The change in error rate is under a certain percentage OR the error
 % rate is under the minimum value (done)
-
-
-
-A = [2 10; 2 5 ; 8 4; 5 8; 7 5; 6 4; 1 2; 4 9]; % Matrix of A values

@@ -1,5 +1,6 @@
 function [x,y] = points_title(x,y)
 
+%write x,y values on scatter plot
 x_str = num2str(x);
 y_str = num2str(y);
 point_str = strcat('(',x_str,',',y_str,')');

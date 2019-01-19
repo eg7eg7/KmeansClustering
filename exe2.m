@@ -40,6 +40,6 @@ A=A.';
 %[Clusters_A,INDX_A, Err_A]=CalcKmeansForA(A , Thrsh ,maxITER );
 
 MFCC_shee_MFCC_shoo = [MFCCs_shee MFCCs_shoo]; %connect MFCC_shee and MFCCs_shoo matrices
-[Clusters1,INDX1, Err1]=CalcKmeans(MFCC_shee_MFCC_shoo , K , Thrsh ,maxITER ); 
+[Clusters1,INDX1, Err1]=CalcKmeans(MFCC_shee_MFCC_shoo , K , Thrsh ,maxITER );
 
 % EOF
