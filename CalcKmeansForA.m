@@ -68,18 +68,7 @@ for iterations=1:maxITER
     Clusters = clusterWeightCalc(INDX,DataMATRIX, K);
     
     if((iterations ~= 1))
-        %cluster_changes(1,iterations) = calcClusterChanges(prev_Clusters, Clusters);
-
-        %draw plot after every iteration
-        figure
-        axis([0 1 0 1])
-        for i=1:n
-            cluster_index = INDX(i);
-            scatter(DataMATRIX(1,i), DataMATRIX(2,i), colors(cluster_index));
-            scatter(Clusters(1,cluster_index), Clusters(2,cluster_index), 'filled', colors(cluster_index));
-            hold on
-        end
-        
+        %cluster_changes(1,iterations) = calcClusterChanges(prev_Clusters, Clusters);        
         cluster_change = calcClusterChanges(prev_Clusters, Clusters);
         if(cluster_change <= min_cluster_change)
             disp("reached minimum cluster change");
@@ -98,7 +87,15 @@ for iterations=1:maxITER
         end
             
     end
-    
+            %draw plot after every iteration
+        figure
+        axis([0 1 0 1])
+        for i=1:n
+            cluster_index = INDX(i);
+            scatter(DataMATRIX(1,i), DataMATRIX(2,i), colors(cluster_index));
+            scatter(Clusters(1,cluster_index), Clusters(2,cluster_index), 'filled', colors(cluster_index));
+            hold on
+        end
 end
 disp("reached max iterations");
 
