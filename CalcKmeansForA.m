@@ -60,16 +60,21 @@ for iterations=1:maxITER
     Clusters = clusterWeightCalc(INDX,DataMATRIX, K);
     
     %draw plot after every iteration
-
-        figure
-        axis([0 1 0 1])
-        for i=1:n
-            cluster_index = INDX(i);
-            scatter(DataMATRIX(1,i), DataMATRIX(2,i), colors(cluster_index));
-            scatter(Clusters(1,cluster_index), Clusters(2,cluster_index), 'filled', colors(cluster_index));
-            hold on
-        end
-
+    
+    figure
+    axis([0 1 0 1])
+    for i=1:n
+        cluster_index = INDX(i);
+        [x, y] = points_title(DataMATRIX(1,i), DataMATRIX(2,i));
+        scatter(x, y, colors(cluster_index));
+        
+        [x, y] = points_title(Clusters(1,cluster_index), Clusters(2,cluster_index));
+        scatter(x, y, 'filled', colors(cluster_index));
+        title_str = strcat('Iteration # ', int2str(iterations));
+        title(title_str);
+        hold on
+    end
+    
 end
 disp("reached max iterations");
 

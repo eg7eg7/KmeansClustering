@@ -23,11 +23,6 @@ maxITER=3;
 %Thrsh = 100*(Err(N)-Err(N-1))/(Err(N))
 
 colors = ['r' 'g' 'b'];
-err_max_change = 0.003;
-min_cluster_change = 0.01;
-if isempty(Thrsh)
-    Thrsh = 1;
-end
 
 if isempty(maxITER)
     maxITER = 5;
@@ -47,7 +42,6 @@ INDX = randi(K,1,n);
 Clusters(1:m,1:K) = 0;
 
 Err(1:1,1:maxITER)=0;
-%cluster_changes(1:1,1:maxITER)=0;
 
 indexes = [1,4,7];
 [t,p] = size(indexes);
@@ -63,27 +57,29 @@ for iterations=1:maxITER
     DistanceMatrix = calculateDistances(DataMATRIX,Clusters);
     INDX = assignClosest(DistanceMatrix);
     Err(1,iterations)=calcError(INDX,DistanceMatrix);
-    prev_Clusters = Clusters;
     Clusters = clusterWeightCalc(INDX,DataMATRIX, K);
     
-    if((iterations ~= 1))       
-        cluster_change = calcClusterChanges(prev_Clusters, Clusters);
-        if(cluster_change <= min_cluster_change)
-           disp("reached minimum cluster change " + cluster_change +" of" + min_cluster_change);
-            return;
-        end
-        %%
-       
-    end
-            %draw plot after every iteration
+    %draw plot after every iteration
+
         figure
         axis([0 1 0 1])
         for i=1:n
+            title_str = strcat('Iteration # ', int2str(iterations));
+            x = DataMATRIX(1,i); 
+            y = DataMATRIX(2,i);
+            x_str = num2str(x); 
+            y_str = num2str(y);
+            point_str = strcat('(',x_str);
+            point_str = strcat(point_str,')')
+            dx = 0.1; dy = 0.1; % displacement so the text does not overlay the data points
+            text(x+dx, y+dy, point_str);
+            title(title_str);
             cluster_index = INDX(i);
-            scatter(DataMATRIX(1,i), DataMATRIX(2,i), colors(cluster_index));
+            scatter(x, y, colors(cluster_index));
             scatter(Clusters(1,cluster_index), Clusters(2,cluster_index), 'filled', colors(cluster_index));
             hold on
         end
+
 end
 disp("reached max iterations");
 
