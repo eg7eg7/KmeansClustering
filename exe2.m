@@ -39,7 +39,7 @@ A=A.';
 %% Cluster data
 [Clusters_A,INDX_A, Err_A]=CalcKmeansForA(A , Thrsh ,3 );
 
-MFCC_shee_MFCC_shoo = [MFCCs_shee MFCCs_shoo]; %connect MFCC_shee and MFCCs_shoo matrices
+MFCC_shee_MFCC_shoo = [MFCCs_shee MFCCs_shoo]; %unify data MFCC_shee and MFCCs_shoo matrices for clustering
 [Clusters1,INDX1, Err1]=CalcKmeans(MFCC_shee_MFCC_shoo , K , Thrsh ,maxITER );
 
 % EOF
