@@ -2,7 +2,7 @@ function [Clusters,INDX, Err]=CalcKmeansForA(DataMATRIX , Thrsh ,maxITER )
 K=3;
 maxITER=3;
 
-%                  |EDEN DUPONT | DANIIL ROLNIK | EDEN SHARONI |
+%                  | EDEN DUPONT | DANIIL ROLNIK | EDEN SHARONI |
 %                                 AFEKA COLLEGE
 %   Inputs
 %    K - the number of clusters

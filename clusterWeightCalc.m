@@ -25,4 +25,3 @@ for i=1:K
         Clusters(:,i) = Clusters(:,i)/num_points_in_cluster(1,i);
     end
 end
-disp("end");
