@@ -21,8 +21,8 @@ function [Clusters,INDX, Err]=CalcKmeans(DataMATRIX , K , Thrsh ,maxITER )
 
 %Thrsh = 100*(Err(N)-Err(N-1))/(Err(N))
 
-err_max_change = 0.003;
-min_cluster_change = 0.01;
+err_max_change = 0.0003;
+min_cluster_change = 0.001;
 if isempty(Thrsh)
     Thrsh = 1;
 end
