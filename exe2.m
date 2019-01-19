@@ -14,7 +14,7 @@ LF = 100;               % lower frequency limit (Hz)
 HF = 3700;              % upper frequency limit (Hz)
 
 %% Define KMeans variables
-K = 3;                  % Number of clusters
+K = 4;                  % Number of clusters
 Thrsh = 0.05;             % Min error (percentage)
 maxITER = 20;            % Maximum iterations
 
@@ -37,7 +37,7 @@ A=A.';
 [ MFCCs_shoo, FBE_shoo, frames_shoo ] = mfcc( speech_shoo, fs_shoo, Tw, Ts, alpha, @hamming, [LF HF], M, C+1, L );
 
 %% Cluster data
-%[Clusters_A,INDX_A, Err_A]=CalcKmeansForA(A , Thrsh ,maxITER );
+[Clusters_A,INDX_A, Err_A]=CalcKmeansForA(A , Thrsh ,3 );
 
 MFCC_shee_MFCC_shoo = [MFCCs_shee MFCCs_shoo]; %connect MFCC_shee and MFCCs_shoo matrices
 [Clusters1,INDX1, Err1]=CalcKmeans(MFCC_shee_MFCC_shoo , K , Thrsh ,maxITER );

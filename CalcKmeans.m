@@ -1,8 +1,8 @@
 function [Clusters,INDX, Err]=CalcKmeans(DataMATRIX , K , Thrsh ,maxITER )
 
 
-%                  |EDEN DUPONT | DANIIL ROLNIK | EDEN SHARONI |
-%                                 AFEKA COLLEGE
+%                  | EDEN DUPONT | DANIIL ROLNIK | EDEN SHARONI |
+%                              AFEKA COLLEGE - 2019
 %   Inputs
 %    K - the number of clusters
 %
@@ -19,7 +19,6 @@ function [Clusters,INDX, Err]=CalcKmeans(DataMATRIX , K , Thrsh ,maxITER )
 %
 %           INDX is N size vector, which maps the centroid points into clusters
 
-%Thrsh = 100*(Err(N)-Err(N-1))/(Err(N))
 err_max_change = 0.0003;
 min_cluster_change = 0.001;
 if isempty(Thrsh)
@@ -81,14 +80,3 @@ for iterations=1:maxITER
     
 end
 disp("reached max iterations");
-
-
-%% repeat 2, 3 and 4 until halting criteria is met:
-% a. no cluster is changed (done - if cluster_changes is 0)
-%
-% b. max iterations reached (done)
-%
-% c. changes in cluster centers are minor (done)
-%
-% d. The change in error rate is under a certain percentage OR the error
-% rate is under the minimum value (done)
