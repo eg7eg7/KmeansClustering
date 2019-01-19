@@ -37,9 +37,12 @@ A=A.';
 [ MFCCs_shoo, FBE_shoo, frames_shoo ] = mfcc( speech_shoo, fs_shoo, Tw, Ts, alpha, @hamming, [LF HF], M, C+1, L );
 
 %% Cluster data
+disp("Running Kmeans on example matrix A ");
 [Clusters_A,INDX_A, Err_A]=CalcKmeansForA(A , Thrsh ,3 );
 
 MFCC_shee_MFCC_shoo = [MFCCs_shee MFCCs_shoo]; %unify data MFCC_shee and MFCCs_shoo matrices for clustering
+disp(" ");
+disp("Running Kmeans on shee and shoo ");
 [Clusters1,INDX1, Err1]=CalcKmeans(MFCC_shee_MFCC_shoo , K , Thrsh ,maxITER );
 
 % EOF
