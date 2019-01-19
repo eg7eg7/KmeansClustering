@@ -16,7 +16,7 @@ HF = 3700;              % upper frequency limit (Hz)
 %% Define KMeans variables
 K = 3;                  % Number of clusters
 Thrsh = 0.05;             % Min error (percentage)
-maxITER = 100;            % Maximum iterations
+maxITER = 20;            % Maximum iterations
 
 wav_file1 = 'shee_mono_test.wav';  % input audio filename
 wav_file2 = 'shoo_mono_test.wav';
@@ -38,14 +38,8 @@ A=A.';
 
 %% Cluster data
 %[Clusters_A,INDX_A, Err_A]=CalcKmeansForA(A , Thrsh ,maxITER );
+
 MFCC_shee_MFCC_shoo = [MFCCs_shee MFCCs_shoo]; %connect MFCC_shee and MFCCs_shoo matrices
 [Clusters1,INDX1, Err1]=CalcKmeans(MFCC_shee_MFCC_shoo , K , Thrsh ,maxITER ); 
-
-
-
-%wav_file3 = '04 Lelite_mono.wav';
-%[ speech_z, fs_z] = audioread( wav_file3 );
-%[ MFCCs_z, FBE_z, frames_z ] = mfcc( speech_z, fs_z, Tw, Ts, alpha, @hamming, [LF HF], M, C+1, L );
-%[Clusters3,INDX3, Err3]=CalcKmeans(MFCCs_z , K , Thrsh ,maxITER );
 
 % EOF
