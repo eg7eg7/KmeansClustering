@@ -47,6 +47,7 @@ INDX = randi(K,1,n);
 Clusters(1:m,1:K) = 0;
 
 Err(1:1,1:maxITER)=0;
+%cluster_changes(1:1,1:maxITER)=0;
 
 indexes = [1,4,7];
 [t,p] = size(indexes);
@@ -62,10 +63,19 @@ for iterations=1:maxITER
     DistanceMatrix = calculateDistances(DataMATRIX,Clusters);
     INDX = assignClosest(DistanceMatrix);
     Err(1,iterations)=calcError(INDX,DistanceMatrix);
+    prev_Clusters = Clusters;
     Clusters = clusterWeightCalc(INDX,DataMATRIX, K);
     
-    %draw plot after every iteration
-    if(iterations == 1 || iterations ==3)
+    if((iterations ~= 1))       
+        cluster_change = calcClusterChanges(prev_Clusters, Clusters);
+        if(cluster_change <= min_cluster_change)
+           disp("reached minimum cluster change " + cluster_change +" of" + min_cluster_change);
+            return;
+        end
+        %%
+       
+    end
+            %draw plot after every iteration
         figure
         axis([0 1 0 1])
         for i=1:n
@@ -74,7 +84,6 @@ for iterations=1:maxITER
             scatter(Clusters(1,cluster_index), Clusters(2,cluster_index), 'filled', colors(cluster_index));
             hold on
         end
-    end
 end
 disp("reached max iterations");
 
